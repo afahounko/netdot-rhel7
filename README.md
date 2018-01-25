@@ -85,7 +85,7 @@ Use the following command to skip certificate checking:
      cd /usr/local/src/netdot/
      make rpm-install
 
-The prompt will ask you some questions. Answers are marked in `red`:
+The prompt will ask you some questions. Answers are marked in  [span class="orange"]red[/span]:
 
 ```
 Installing required Perl modules
