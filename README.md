@@ -320,7 +320,7 @@ the changes to take effect in the web interface.
     vim /usr/local/src/netdot/etc/Site.conf
     ~~~~
 
-    ~~~~
+```
 #####################################################################
 # User Interface
 #####################################################################
@@ -394,7 +394,7 @@ DB_NETDOT_USER =>  'netdot_user',
 DB_NETDOT_PASS =>  'netdot_pass',
 
 ...
-    ~~~~
+```
 
 ## Database initialization
 
