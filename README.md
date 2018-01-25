@@ -35,16 +35,14 @@ Install EPEL repository
 
     yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
-***NOTE for RHN users***
-
-You need to also enable the 'optional' repository to use EPEL packages as they depend on packages in that repository. This can be done by enabling the RHEL optional subchannel for RHN-Classic. For certificate-based subscriptions see Red Hat Subscription Management Guide. For EPEL 7, in addition to the 'optional' repository (rhel-7-server-optional-rpms), you also need to enable the 'extras' repository (rhel-7-server-extras-rpms).
-
+>**NOTE for RHN users**
+   You need to also enable the 'optional' repository to use EPEL packages as they depend on packages in that repository. This can be done by enabling the RHEL optional subchannel for RHN-Classic. For certificate-based subscriptions see Red Hat Subscription Management Guide. For EPEL 7, in addition to the 'optional' repository (rhel-7-server-optional-rpms), you also need to enable the 'extras' repository (rhel-7-server-extras-rpms).
 
 ## CentOS7
 
     yum install -y epel-release
 
-# Step 1 - Install and compile dnssec-tools
+# Step 1 - dnssec-tools
 
 Install and compile dnssec-tools
 
@@ -69,26 +67,23 @@ Finish the dnssec-tools installation
         cp validator/etc/resolv.conf /usr/local/etc/dnssec-tools/resolv.conf
         cp validator/etc/root.hints /usr/local/etc/dnssec-tools/root.hints
 
-***Note***
-
-The certifcate on dnssec-tools.org has expired when writing this tutorial :-)
-Use the following command to skip certificate checking:
+>**Tip**
+  The certifcate on dnssec-tools.org has expired when writing this tutorial :-)
+  Use the following command to skip certificate checking:
 
      wget --no-check-certificate https://www.dnssec-tools.org/download/dnssec-tools-2.2.tar.gz
 
 
-# Step 2 - Clone and install Netdot
+# Step 2 - Netdot
 
-## Download and install Netdot
+Download and install Netdot
 
-```bash  
      cd /usr/local/src/
      git clone https://github.com/cvicente/Netdot.git netdot
      cd /usr/local/src/netdot/
      make rpm-install
-```
 
-It will ask you some questions. Answer for `mysql` for the RDBMS backend and just hit `ENTER` for others.
+It will ask you some questions. Answer for `mysql` for the RDBMS backend and hit `ENTER` for other prompts.
 
 ```
 Installing required Perl modules
@@ -204,11 +199,13 @@ If there are still any missing Perl modules, you can try:
 ```
 
 
-## Install SNMP
+# Step 3 - SNMP
+
+Install snmp binaries
 
     yum install net-snmp net-snmp-utils
 
-### Download MIBs
+Download netdisco latest MIBs file
 
     wget http://downloads.sourceforge.net/project/netdisco/netdisco-mibs/latest-snapshot/netdisco-mibs-snapshot.tar.gz -P /tmp
     tar -zxf /tmp/netdisco-mibs-snapshot.tar.gz -C /usr/local/src
