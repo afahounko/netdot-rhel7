@@ -414,8 +414,82 @@ DB_NETDOT_PASS =>  'netdot_pass',
     make install PREFIX=/usr/local/netdot APACHEUSER=apache APACHEGROUP=apache
     ~~~~
 
+## Apache configuration
+
+*   Edit the supplied Apache config template for either Local, RADIUS, Kerberos or LDAP authentication, copy it to your Apache config directory and include it somewhere in your Apache configuration file:
+
+    ~~~~ {.bash}
+    cp /usr/local/netdot/etc/netdot_apache24_local.conf /etc/httpd/conf.d/
+    ~~~~
+
+*   Restart Apache:
+
+    ~~~~ {.bash}
+    systemctl restart httpd.service
+    ~~~~
 
 
+## CRON jobs
+
+Netdot comes with a few scripts that should be run periodically as cron
+jobs.
+
+*   Retrieval of forwarding tables and ARP caches for IP/MAC address
+    tracking
+
+*   Devices should be re-discovered via SNMP frequently to maintain an
+    accurate list of ports, ip addresses, etc.
+
+*   Rediscovery of network topology
+
+*   With time, old data like forwarding and ARP table entries, audit records,
+    etc. should be deleted from the database to save disk space.
+
+*   Netdot can generate text documentation that is easy to find using
+    simple grepping commands, for example, information about people,
+    locations, device port assignments, etc. This documentation should
+    be kept up to date by exporting it frequently.
+
+*   Configurations for external programs can be generated using Netdot
+    data. See details later in this document.
+
+*   The netdot.cron file included in the package is a sample crontab
+    containing recommended periodic jobs. You should customize it to
+    your liking and copy it to your cron directory, for example:
+
+    ~~~~ {.bash}
+    cp /usr/local/src/netdot/netdot.cron /etc/cron.d/netdot
+    ~~~~
+
+
+# Step 5 — Access Netdot
+
+Once this is done, you can restart Apache. If you used the default
+settings, point your browser to:
+
+~~~~
+http://servername.mydomain/netdot/
+~~~~
+
+You should be able to log in with:
+
+~~~~
+username: "admin"
+password: "admin"
+~~~~
+
+>**Tip**
+If you are using the one of the external authentication options, you should
+have Netdot(radius|ldap|krb5)FailToLocal set to "yes" in your `netdot_apache2_x.conf` 
+file.
+
+>**Warning**
+Please remember to change the "admin" password! Go to `Contacts ->
+People`, search for 'Admin', click on [edit] and type in a new password.
+Then click on the Update button.
+
+
+Have fun.
 
 
 
