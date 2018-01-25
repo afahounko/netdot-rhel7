@@ -68,10 +68,14 @@ Finish the dnssec-tools installation
         cp validator/etc/root.hints /usr/local/etc/dnssec-tools/root.hints
 
 >**Tip**
-  The certifcate on dnssec-tools.org has expired when writing this tutorial :-)
-  Use the following command to skip certificate checking:
+The certifcate on dnssec-tools.org has expired when writing this tutorial :-)
 
-     wget --no-check-certificate https://www.dnssec-tools.org/download/dnssec-tools-2.2.tar.gz
+*   Use the following command to skip certificate checking.
+
+    ~~~~ {.bash}
+    wget --no-check-certificate https://www.dnssec-tools.org/download/dnssec-tools-2.2.tar.gz
+    ~~~~
+
 
 
 # Step 2 - Netdot
@@ -223,41 +227,26 @@ mibdirs /usr/local/netdisco/mibs/rfc
 mibdirs +/usr/local/netdisco/mibs/net-snmp
 mibdirs +/usr/local/netdisco/mibs/cisco
 
-mibdirs +/usr/local/netdisco/mibs/3com
-mibdirs +/usr/local/netdisco/mibs/aerohive
-mibdirs +/usr/local/netdisco/mibs/alcatel
+# mibdirs +/usr/local/netdisco/mibs/3com
+# mibdirs +/usr/local/netdisco/mibs/aerohive
+# mibdirs +/usr/local/netdisco/mibs/alcatel
 mibdirs +/usr/local/netdisco/mibs/allied
 mibdirs +/usr/local/netdisco/mibs/apc
 mibdirs +/usr/local/netdisco/mibs/arista
 mibdirs +/usr/local/netdisco/mibs/aruba
 mibdirs +/usr/local/netdisco/mibs/asante
 mibdirs +/usr/local/netdisco/mibs/avaya
-mibdirs +/usr/local/netdisco/mibs/bluecoat
-mibdirs +/usr/local/netdisco/mibs/bluesocket
-mibdirs +/usr/local/netdisco/mibs/cabletron
-mibdirs +/usr/local/netdisco/mibs/checkpoint
-mibdirs +/usr/local/netdisco/mibs/ciscosb
-mibdirs +/usr/local/netdisco/mibs/citrix
-mibdirs +/usr/local/netdisco/mibs/colubris
-mibdirs +/usr/local/netdisco/mibs/cyclades
-mibdirs +/usr/local/netdisco/mibs/d-link
-mibdirs +/usr/local/netdisco/mibs/dell
-mibdirs +/usr/local/netdisco/mibs/enterasys
-mibdirs +/usr/local/netdisco/mibs/extreme
-mibdirs +/usr/local/netdisco/mibs/extricom
-mibdirs +/usr/local/netdisco/mibs/f5
-mibdirs +/usr/local/netdisco/mibs/force10
-mibdirs +/usr/local/netdisco/mibs/fortinet
-mibdirs +/usr/local/netdisco/mibs/foundry
-mibdirs +/usr/local/netdisco/mibs/gigamon
-mibdirs +/usr/local/netdisco/mibs/h3c
-mibdirs +/usr/local/netdisco/mibs/hp
+
 ...
 [snip]
+...
 ```
 
-**Note**:
-Comment the unecessary mibs with `#`
+>**Note**:
+   Comment the unecessary mibs with `#`
+
+
+
 
 
 
