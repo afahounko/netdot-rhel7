@@ -222,7 +222,7 @@ Edit `/etc/snmp/snmp.conf`
     vim /etc/snmp/snmp.conf
 
 ```
-#        if using outside of netdisco.
+# if using outside of netdisco.
 mibdirs /usr/local/netdisco/mibs/rfc
 mibdirs +/usr/local/netdisco/mibs/net-snmp
 mibdirs +/usr/local/netdisco/mibs/cisco
@@ -272,9 +272,10 @@ without overwriting your site-specific configuration.
 Notice that, each time you modify Site.conf, you must restart Apache for
 the changes to take effect in the web interface.
 
-    ~~~~ {.bash}
+
+ ~~~~ {.bash}
     systemctl restart httpd.service
-    ~~~~
+ ~~~~
 
 ## Database settings
 
