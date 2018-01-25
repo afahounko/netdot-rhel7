@@ -493,5 +493,10 @@ Then click on the Update button.
 Have fun.
 
 
+# References
+
+[netdot official documentation](https://github.com/cvicente/Netdot)
+
+[Vadym Kalsin - DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-document-your-network-with-netdot-on-centos-7)
 
 
