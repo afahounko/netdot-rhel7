@@ -62,10 +62,10 @@ Download and build dnssec-tools
 
 Finish the dnssec-tools installation
 
-        cd /usr/src/dnssec-tools-2.2
-        cp validator/etc/dnsval.conf /usr/local/etc/dnssec-tools/dnsval.conf
-        cp validator/etc/resolv.conf /usr/local/etc/dnssec-tools/resolv.conf
-        cp validator/etc/root.hints /usr/local/etc/dnssec-tools/root.hints
+    cd /usr/src/dnssec-tools-2.2
+    cp validator/etc/dnsval.conf /usr/local/etc/dnssec-tools/dnsval.conf
+    cp validator/etc/resolv.conf /usr/local/etc/dnssec-tools/resolv.conf
+    cp validator/etc/root.hints /usr/local/etc/dnssec-tools/root.hints
 
 >**Tip**
 The certifcate on dnssec-tools.org has expired when writing this tutorial (funny)
@@ -320,7 +320,7 @@ the changes to take effect in the web interface.
     vim /usr/local/src/netdot/etc/Site.conf
     ~~~~
 
-```
+   ```
 #####################################################################
 # User Interface
 #####################################################################
@@ -394,7 +394,7 @@ DB_NETDOT_USER =>  'netdot_user',
 DB_NETDOT_PASS =>  'netdot_pass',
 
 ...
-```
+   ```
 
 ## Database initialization
 
