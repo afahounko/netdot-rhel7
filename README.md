@@ -123,6 +123,28 @@ The script may ask you to create a fake password for testing purposes. You can s
 
 ```
 
+
+> **Tip**
+If you are still missing Perl modules after running this step,
+you can complete the process in the next step.
+
+*   If your package manager is not supported, or if you are missing
+    dependencies, you can install those by hand. However, you can at least
+    take advantage of the CPAN to install Perl modules automatically.
+
+    To test for missing modules in your system, run:
+
+    ~~~~ {.bash}
+    ~% make testdeps
+    ~~~~
+
+    Then, use this to install the missing modules:
+
+    ~~~~ {.bash}
+    ~# make installdeps
+    ~~~~
+
+
 The script will install the missing modules.
 
 Run `make installdeps`  until you get all perl modules installed
