@@ -36,7 +36,11 @@ Install EPEL repository
     yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 >**NOTE for RHN users**
-   You need to also enable the 'optional' repository to use EPEL packages as they depend on packages in that repository. This can be done by enabling the RHEL optional subchannel for RHN-Classic. For certificate-based subscriptions see Red Hat Subscription Management Guide. For EPEL 7, in addition to the 'optional' repository (rhel-7-server-optional-rpms), you also need to enable the 'extras' repository (rhel-7-server-extras-rpms).
+
+You need to also enable the 'optional' repository to use EPEL packages as they depend on packages in that repository.
+This can be done by enabling the RHEL optional subchannel for RHN-Classic.
+For certificate-based subscriptions see Red Hat Subscription Management Guide.
+For EPEL 7, in addition to the 'optional' repository (rhel-7-server-optional-rpms), you also need to enable the 'extras' repository (rhel-7-server-extras-rpms).
 
 ## CentOS7
 
