@@ -44,6 +44,7 @@ You need to also enable the 'optional' repository to use EPEL packages as they d
 
     yum install -y epel-release
 
+# Step 1 - Install and compile dnssec-tools
 
 Install and compile dnssec-tools
 
@@ -76,14 +77,16 @@ Use the following command to skip certificate checking:
      wget --no-check-certificate https://www.dnssec-tools.org/download/dnssec-tools-2.2.tar.gz
 
 
-# Install Netdot
+# Step 2 - Clone and install Netdot
 
-## Download and build Netdot
+## Download and install Netdot
 
+```bash  
      cd /usr/local/src/
      git clone https://github.com/cvicente/Netdot.git netdot
      cd /usr/local/src/netdot/
      make rpm-install
+```
 
 It will ask you some questions. Answer for `mysql` for the RDBMS backend and just hit `ENTER` for others.
 
@@ -121,6 +124,8 @@ Would you like me to automatically choose some CPAN mirror
 sites for you? (This means connecting to the Internet) [yes] ENTER
 The script may ask you to create a fake password for testing purposes. You can skip that part.
 
+[snip]
+
 ```
 
 
@@ -144,10 +149,14 @@ you can complete the process in the next step.
     ~# make installdeps
     ~~~~
 
+    If you need to install modules individually, you can do this
+    instead:
 
-The script will install the missing modules.
+    ~~~~ {.bash}
+    ~# cpan
+    >install Module::Blah
+    ~~~~
 
-Run `make installdeps`  until you get all perl modules installed
 
 ```
 
@@ -193,6 +202,7 @@ If there are still any missing Perl modules, you can try:
     make installdeps
 
 ```
+
 
 ## Install SNMP
 
