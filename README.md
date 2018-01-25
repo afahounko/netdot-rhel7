@@ -68,7 +68,7 @@ Finish the dnssec-tools installation
         cp validator/etc/root.hints /usr/local/etc/dnssec-tools/root.hints
 
 >**Tip**
-The certifcate on dnssec-tools.org has expired when writing this tutorial :-)
+The certifcate on dnssec-tools.org has expired when writing this tutorial (funny)
 
 *   Use the following command to skip certificate checking.
 
@@ -87,7 +87,7 @@ Download and install Netdot
      cd /usr/local/src/netdot/
      make rpm-install
 
-It will ask you some questions. Answer for `mysql` for the RDBMS backend and hit `ENTER` for other prompts.
+It will ask you some questions. Answer for `mysql` or `Pg` for the RDBMS backend and hit `ENTER` to confirm the default values for other prompts.
 
 ```
 Installing required Perl modules
@@ -230,12 +230,8 @@ mibdirs +/usr/local/netdisco/mibs/cisco
 # mibdirs +/usr/local/netdisco/mibs/3com
 # mibdirs +/usr/local/netdisco/mibs/aerohive
 # mibdirs +/usr/local/netdisco/mibs/alcatel
-mibdirs +/usr/local/netdisco/mibs/allied
-mibdirs +/usr/local/netdisco/mibs/apc
-mibdirs +/usr/local/netdisco/mibs/arista
-mibdirs +/usr/local/netdisco/mibs/aruba
-mibdirs +/usr/local/netdisco/mibs/asante
-mibdirs +/usr/local/netdisco/mibs/avaya
+# mibdirs +/usr/local/netdisco/mibs/allied
+# mibdirs +/usr/local/netdisco/mibs/apc
 
 ...
 [snip]
@@ -244,6 +240,179 @@ mibdirs +/usr/local/netdisco/mibs/avaya
 
 >**Note**:
    Comment the unecessary mibs with `#`
+
+Enable and start snmp servie
+
+    systemctl enable snmpd.service
+    systemctl start  snmpd.service
+
+
+# Step 4 — Install Netdot
+
+## Netdot Settings
+
+Netdot comes with a configuration file that you need to customize to
+your needs. You need to create a copy of `Default.conf` with the
+name `Site.conf`
+
+~~~~ {.bash}
+cp /usr/local/src/netdot/etc/Default.conf /usr/local/src/netdot/etc/Site.conf
+~~~~
+
+Then, modify `Site.conf` to reflect your specific options. The original
+file contains descriptions of each configuration item.
+
+**Netdot will first read Default.conf and then Site.conf**
+
+The reason for keeping two files is that when an upgrade is performed,
+the `Default.conf` file can be re-written (to add new variables, etc.),
+without overwriting your site-specific configuration.
+
+> **Tip**
+Notice that, each time you modify Site.conf, you must restart Apache for
+the changes to take effect in the web interface.
+
+    ~~~~ {.bash}
+    systemctl restart httpd.service
+    ~~~~
+
+## Database settings
+
+*   Prepare your database administrator (DBA) account
+
+    MySQL users: The DBA account for MySQL is usually created when installing
+    the package. Make sure to set a password during the installation.
+
+    Pg users: PostgreSQL normally comes with a default DBA account named 'postgres'.
+    After installing, you may need to set the password for this account as follows:
+
+    ~~~~ {.bash}
+    ~% sudo -u postgres psql postgres
+    ~~~~
+
+    Set a password for the "postgres" database role using the command:
+
+    ~~~~
+    \password postgres
+    ~~~~
+
+    and give your password when prompted. Type Control+D to exit the prompt.
+
+*   Adjust your database configuration if necessary
+
+    MySQL users: If you intend to use the IPAM functionalities in Netdot, you might
+    need to increase the maximum packet buffer size in `my.conf` to something like:
+
+    ~~~~
+    vim /etc/my.cnf
+    ~~~~
+
+    ~~~~
+    [mysqld]
+    ...
+    max_allowed_packet = 16M
+    ...
+    ~~~~
+
+*   Adjust settings in `/usr/local/src/netdot/etc/Site.conf` with your configurations.
+
+    ~~~~
+    vim /usr/local/src/netdot/etc/Site.conf
+    ~~~~
+
+    ~~~~
+#####################################################################
+# User Interface
+#####################################################################
+
+# The name of the machine or virtual host where Netdot is located
+NETDOTNAME  => 'netdot.localdomain',
+
+...
+
+#################################################################
+# Database setup
+#################################################################
+
+#
+# DB_TYPE defines what sort of database NetDoT trys to talk to
+# [mysql|Pg]
+
+DB_TYPE =>  'mysql',
+
+# DB_HOME is where the Database's commandline tools live.  $DB_HOME/bin
+# should contain the binaries themselves, e.g. if "which mysql" gives
+# "/usr/local/mysql/bin/mysql", $DB_HOME should be "/usr/local/mysql"
+
+DB_HOME => '/usr',
+
+# Set DB_DBA to the name of a DB user with permission to create new databases
+# Set DB_DBA_PASSWORD to that user's password (if you don't, you'll be prompted
+# later)
+
+# For mysql, you can try 'root'.  For Pg, it is usually 'postgres'
+
+DB_DBA          =>  'root',
+DB_DBA_PASSWORD =>  '',
+
+#
+# Set this to the Fully Qualified Domain Name of your database server.
+# If the database is local, rather than on a remote host, using "localhost"
+# will greatly enhance performance.
+
+DB_HOST =>  'localhost',
+
+# If you're not running your database server on its default port,
+# specify the port the database server is running on below.
+# With mysql, it is usually safe to leave this blank.
+# With Pg, you will probably want to use '5432'
+
+DB_PORT => '',
+
+#
+# Set this to the canonical name of the interface NetDoT will be talking to the
+# database on.  If you said that the DB_HOST above was "localhost," this
+# should be too. This value will be used to grant NetDoT access to the database.
+# If you want to access the NetDoT database from multiple hosts, you'll need
+# to grant those database rights by hand.
+#
+
+DB_NETDOT_HOST =>  'localhost',
+
+# set this to the name you want to give to the NetDoT database in
+# your database server.
+
+DB_DATABASE =>  'netdot',
+
+# Set this to the name of the netdot database user
+
+DB_NETDOT_USER =>  'netdot_user',
+
+# Set this to the password used by the NetDoT database user
+# *** Change This Before Installation***
+
+DB_NETDOT_PASS =>  'netdot_pass',
+
+...
+    ~~~~
+
+## Database initialization
+
+*   You will then be ready to initialize the database.
+
+    ~~~~ {.bash}
+    cd /usr/local/src/netdot
+    make installdb 
+    ~~~~
+
+## Netdot installation
+
+*   From the top directory in the package, do:
+
+    ~~~~ {.bash}
+    cd /usr/local/src/netdot
+    make install PREFIX=/usr/local/netdot APACHEUSER=apache APACHEGROUP=apache
+    ~~~~
 
 
 
