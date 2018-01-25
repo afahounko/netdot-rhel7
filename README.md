@@ -85,13 +85,13 @@ Use the following command to skip certificate checking:
      cd /usr/local/src/netdot/
      make rpm-install
 
-The prompt will ask you some questions. Answers are marked in  [span class="orange"]red[/span]:
+It will ask you some questions. Answer for `mysql` for the RDBMS backend and just hit `ENTER` for others.
 
 ```
 Installing required Perl modules
 /usr/bin/perl bin/perldeps.pl install
 
-Which RDBMS do you plan to use as backend: [mysql|Pg]? `mysql`
+Which RDBMS do you plan to use as backend: [mysql|Pg]? mysql
 
 CPAN.pm requires configuration, but most of it can be done automatically.
 If you answer 'no' below, you will enter an interactive dialog for each
@@ -109,7 +109,7 @@ module or by configuring itself to use 'sudo' (if available).  You may also
 resolve this problem manually if you need to customize your setup.
 
 What approach do you want?  (Choose 'local::lib', 'sudo' or 'manual')
- [local::lib] `ENTER`
+ [local::lib] ENTER
 
 Autoconfigured everything but 'urllist'.
 
@@ -118,15 +118,17 @@ pick mirrors for you, you can select them from a list or you
 can enter them by hand.
 
 Would you like me to automatically choose some CPAN mirror
-sites for you? (This means connecting to the Internet) [yes] `ENTER`
+sites for you? (This means connecting to the Internet) [yes] ENTER
 The script may ask you to create a fake password for testing purposes. You can skip that part.
+
 ```
 
-The script will install the missing modules. At the end, you should see that every module installed successfully.
+The script will install the missing modules.
 
 Run `make installdeps`  until you get all perl modules installed
 
 ```
+
 ===============RESULTS===============
 RRDs..............................................ok
 GraphViz..........................................ok
@@ -182,6 +184,8 @@ If there are still any missing Perl modules, you can try:
     mv /usr/local/src/netdisco-mibs-3.1 /usr/local/netdisco/mibs
     cp /usr/local/netdisco/mibs/EXTRAS/contrib/snmp.conf /etc/snmp/
 
+Edit `/etc/snmp/snmp.conf`
+
     vim /etc/snmp/snmp.conf
 
 ```
@@ -191,9 +195,9 @@ mibdirs +/usr/local/netdisco/mibs/net-snmp
 mibdirs +/usr/local/netdisco/mibs/cisco
 
 mibdirs +/usr/local/netdisco/mibs/3com
-#mibdirs +/usr/local/netdisco/mibs/aerohive
-#mibdirs +/usr/local/netdisco/mibs/alcatel
-#mibdirs +/usr/local/netdisco/mibs/allied
+mibdirs +/usr/local/netdisco/mibs/aerohive
+mibdirs +/usr/local/netdisco/mibs/alcatel
+mibdirs +/usr/local/netdisco/mibs/allied
 mibdirs +/usr/local/netdisco/mibs/apc
 mibdirs +/usr/local/netdisco/mibs/arista
 mibdirs +/usr/local/netdisco/mibs/aruba
@@ -219,8 +223,13 @@ mibdirs +/usr/local/netdisco/mibs/foundry
 mibdirs +/usr/local/netdisco/mibs/gigamon
 mibdirs +/usr/local/netdisco/mibs/h3c
 mibdirs +/usr/local/netdisco/mibs/hp
-
+...
+[snip]
 ```
+
+**Note**:
+Comment the unecessary mibs with `#`
+
 
 
 
