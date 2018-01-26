@@ -285,17 +285,32 @@ the changes to take effect in the web interface.
 
 *   Install your database
 
-    MySQL users: To install MySQL server (mariadb)
+    MySQL users: Install and enable MySQL server (mariadb)
     
     ~~~~ {.bash}
     yum install mariadb-server -y
     ~~~~
 
-    Pg users: To install PostgreSQL
+    Enable and start MySQL server (mariadb)
+    
+    ~~~~ {.bash}
+    systemctl enable mariadb.service
+    systemctl start  mariadb.service
+    ~~~~
+
+    Pg users: Install and enable PostgreSQL server
 
     ~~~~ {.bash}
     yum install postgresql-server -y
     ~~~~
+
+    Enable and start Postgresql server
+    
+    ~~~~ {.bash}
+    systemctl enable postgresql.service
+    systemctl start  postgresql.service
+    ~~~~
+
 
 *   Prepare your database administrator (DBA) account
 
