@@ -283,6 +283,20 @@ the changes to take effect in the web interface.
 
 ## Database settings
 
+*   Install your database
+
+    MySQL users: To install MySQL server (mariadb)
+    
+    ~~~~ {.bash}
+    yum install mariadb-server -y
+    ~~~~
+
+    Pg users: To install PostgreSQL
+
+    ~~~~ {.bash}
+    yum install postgresql-server -y
+    ~~~~
+
 *   Prepare your database administrator (DBA) account
 
     MySQL users: The DBA account for MySQL is usually created when installing
